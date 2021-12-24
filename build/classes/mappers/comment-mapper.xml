@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="commentMapper">
+
+	<insert id="insert" parameterType="CommentDTO">
+		insert into tbl_comment values(seq_comment.nextval,#{seq_board}, #{content}, #{writer}, #{writer_id}, sysdate)
+	</insert>
+
+	<select id="getCommentList" resultType="CommentDTO">
+		select * from tbl_comment where seq_board=#{seq_board} order by 1 DESC
+	</select>
+	
+	<delete id="deleteBySeq" parameterType="map">
+		delete from tbl_comment where seq_comment = #{seq_comment}
+	</delete>
+	
+	<update id="modifyBySeq" parameterType="CommentDTO">
+		update tbl_comment set content=#{content} where seq_comment = #{seq_comment}
+	</update>
+</mapper>
